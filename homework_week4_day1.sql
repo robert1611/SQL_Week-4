@@ -1,10 +1,8 @@
--- #1 Query for first_name and last_name in the actor table
+-- #1 How many actors with the last name Wahlberg
 
 SELECT COUNT (last_name)
 FROM actor
 WHERE last_name = 'Wahlberg';
-
--- Count 2
 
 -- How many payments between $3.99 and $5.99
 
@@ -14,8 +12,10 @@ WHERE amount BETWEEN 3.99 and 5.99;
 
 -- #3 what film does the store have the most of
 
-SELECT MAX (inventory_id)
-FROM inventory;
+SELECT film_id , COUNT(film_id) AS count_of_film_id
+FROM inventory
+GROUP BY film_id
+ORDER BY count_of_film_id DESC;
 
 -- #4 how many customers have the last name William
 
@@ -28,13 +28,9 @@ WHERE last_name = 'William';
 SELECT staff_id, COUNT(staff_id) as staff_count
 FROM payment
 GROUP BY staff_id
-ORDER BY staff_id DESC
-;
+ORDER BY staff_id DESC;
 
 -- #6 How many different district names are there
-
-SELECT *
-FROM address;
 
 SELECT COUNT(DISTINCT district)
 FROM address;
@@ -52,7 +48,7 @@ select count(store_id)
 from customer
 where store_id = 1 and last_name like '%es';
 
--- How many payment amounts had rental amounts greater than 250 and customer_id between 380 -430
+-- 9. How many payment amounts had rental amounts greater than 250 and customer_id between 380 -430
 -- use group by and having > 250
 
 SELECT amount
@@ -64,7 +60,7 @@ HAVING COUNT (rental_ID)> 250;
 -- #10 Within the film category, how many ratings are there?  Which rating is the most?
 -- use max for most 
 
-SELECT DISTINCT rating, COUNT(rating) as rating_count
+SELECT DISTINCT rating, COUNT(rating) AS rating_count
 FROM film
 GROUP BY rating
 ORDER BY rating_count DESC;
