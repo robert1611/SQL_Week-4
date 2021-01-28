@@ -28,6 +28,8 @@ WHERE customer_id IN (
 
 -- Question #4 NEPAL
 
+SELECT first_name, last_name, country
+FROM customer
 FULL JOIN address
 ON customer.address_id = address.address_id
 FULL JOIN city
